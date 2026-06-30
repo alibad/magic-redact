@@ -166,5 +166,677 @@
       "extra": ""
     },
     "prompt": "passport identification photo of a person, East Asian, in their 30s, tied-back hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02000.png",
+    "seed": 2000,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a man",
+      "ethnicity": "Mediterranean",
+      "hair": "straight hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a man, Mediterranean, in their 40s, straight hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02001.png",
+    "seed": 2001,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a man",
+      "ethnicity": "Middle Eastern",
+      "hair": "short hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a man, Middle Eastern, in their 50s, short hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02002.png",
+    "seed": 2002,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 60s",
+      "present": "a man",
+      "ethnicity": "Nordic",
+      "hair": "a shaved head",
+      "extra": "with a neutral expression"
+    },
+    "prompt": "passport identification photo of a man, Nordic, in their 60s, a shaved head, with a neutral expression. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02003.png",
+    "seed": 2003,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a woman",
+      "ethnicity": "White",
+      "hair": "straight hair",
+      "extra": "wearing glasses"
+    },
+    "prompt": "passport identification photo of a woman, White, in their early 20s, straight hair, wearing glasses. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02004.png",
+    "seed": 2004,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a man",
+      "ethnicity": "mixed-race",
+      "hair": "curly hair",
+      "extra": "wearing glasses"
+    },
+    "prompt": "passport identification photo of a man, mixed-race, in their 50s, curly hair, wearing glasses. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02005.png",
+    "seed": 2005,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a man",
+      "ethnicity": "South Asian",
+      "hair": "wavy hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a man, South Asian, in their 40s, wavy hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02006.png",
+    "seed": 2006,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a man",
+      "ethnicity": "South Asian",
+      "hair": "short hair",
+      "extra": "wearing glasses"
+    },
+    "prompt": "passport identification photo of a man, South Asian, in their 50s, short hair, wearing glasses. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02007.png",
+    "seed": 2007,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their late 20s",
+      "present": "a man",
+      "ethnicity": "Southeast Asian",
+      "hair": "a shaved head",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a man, Southeast Asian, in their late 20s, a shaved head. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02008.png",
+    "seed": 2008,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their late 20s",
+      "present": "a woman",
+      "ethnicity": "Southeast Asian",
+      "hair": "medium-length hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a woman, Southeast Asian, in their late 20s, medium-length hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02009.png",
+    "seed": 2009,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 30s",
+      "present": "a woman",
+      "ethnicity": "Black",
+      "hair": "tied-back hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a woman, Black, in their 30s, tied-back hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02010.png",
+    "seed": 2010,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their late 20s",
+      "present": "a man",
+      "ethnicity": "Mediterranean",
+      "hair": "curly hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a man, Mediterranean, in their late 20s, curly hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02011.png",
+    "seed": 2011,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a woman",
+      "ethnicity": "White",
+      "hair": "straight hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a woman, White, in their 50s, straight hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02012.png",
+    "seed": 2012,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a man",
+      "ethnicity": "Middle Eastern",
+      "hair": "curly hair",
+      "extra": "wearing glasses"
+    },
+    "prompt": "passport identification photo of a man, Middle Eastern, in their early 20s, curly hair, wearing glasses. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02013.png",
+    "seed": 2013,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a man",
+      "ethnicity": "Southeast Asian",
+      "hair": "a shaved head",
+      "extra": "with a neutral expression"
+    },
+    "prompt": "passport identification photo of a man, Southeast Asian, in their 40s, a shaved head, with a neutral expression. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02014.png",
+    "seed": 2014,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 30s",
+      "present": "a woman",
+      "ethnicity": "Southeast Asian",
+      "hair": "curly hair",
+      "extra": "wearing glasses"
+    },
+    "prompt": "passport identification photo of a woman, Southeast Asian, in their 30s, curly hair, wearing glasses. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02015.png",
+    "seed": 2015,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 60s",
+      "present": "a man",
+      "ethnicity": "East Asian",
+      "hair": "long hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a man, East Asian, in their 60s, long hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02016.png",
+    "seed": 2016,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 60s",
+      "present": "a man",
+      "ethnicity": "Nordic",
+      "hair": "straight hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a man, Nordic, in their 60s, straight hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02017.png",
+    "seed": 2017,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their late 20s",
+      "present": "a man",
+      "ethnicity": "Middle Eastern",
+      "hair": "a shaved head",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a man, Middle Eastern, in their late 20s, a shaved head, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02018.png",
+    "seed": 2018,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a woman",
+      "ethnicity": "East Asian",
+      "hair": "tied-back hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a woman, East Asian, in their 50s, tied-back hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02019.png",
+    "seed": 2019,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "elderly",
+      "present": "a woman",
+      "ethnicity": "White",
+      "hair": "wavy hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a woman, White, elderly, wavy hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02020.png",
+    "seed": 2020,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a woman",
+      "ethnicity": "Black",
+      "hair": "wavy hair",
+      "extra": "with a light beard"
+    },
+    "prompt": "passport identification photo of a woman, Black, in their 50s, wavy hair, with a light beard. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02021.png",
+    "seed": 2021,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "elderly",
+      "present": "a man",
+      "ethnicity": "Nordic",
+      "hair": "straight hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a man, Nordic, elderly, straight hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02022.png",
+    "seed": 2022,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a person",
+      "ethnicity": "Mediterranean",
+      "hair": "straight hair",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a person, Mediterranean, in their 50s, straight hair, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02023.png",
+    "seed": 2023,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a man",
+      "ethnicity": "Southeast Asian",
+      "hair": "a shaved head",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a man, Southeast Asian, in their 40s, a shaved head, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02024.png",
+    "seed": 2024,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a woman",
+      "ethnicity": "mixed-race",
+      "hair": "straight hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a woman, mixed-race, in their 40s, straight hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02025.png",
+    "seed": 2025,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a man",
+      "ethnicity": "Mediterranean",
+      "hair": "long hair",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a man, Mediterranean, in their 50s, long hair, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02026.png",
+    "seed": 2026,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a person",
+      "ethnicity": "Nordic",
+      "hair": "medium-length hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a person, Nordic, in their early 20s, medium-length hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02027.png",
+    "seed": 2027,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a man",
+      "ethnicity": "South Asian",
+      "hair": "short hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a man, South Asian, in their early 20s, short hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02028.png",
+    "seed": 2028,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 30s",
+      "present": "a woman",
+      "ethnicity": "East Asian",
+      "hair": "a shaved head",
+      "extra": "wearing glasses"
+    },
+    "prompt": "passport identification photo of a woman, East Asian, in their 30s, a shaved head, wearing glasses. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02029.png",
+    "seed": 2029,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 60s",
+      "present": "a man",
+      "ethnicity": "Mediterranean",
+      "hair": "long hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a man, Mediterranean, in their 60s, long hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02030.png",
+    "seed": 2030,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 30s",
+      "present": "a man",
+      "ethnicity": "Middle Eastern",
+      "hair": "short hair",
+      "extra": "with a light beard"
+    },
+    "prompt": "passport identification photo of a man, Middle Eastern, in their 30s, short hair, with a light beard. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02031.png",
+    "seed": 2031,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 60s",
+      "present": "a woman",
+      "ethnicity": "Middle Eastern",
+      "hair": "a shaved head",
+      "extra": "with a neutral expression"
+    },
+    "prompt": "passport identification photo of a woman, Middle Eastern, in their 60s, a shaved head, with a neutral expression. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02032.png",
+    "seed": 2032,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "elderly",
+      "present": "a man",
+      "ethnicity": "mixed-race",
+      "hair": "wavy hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a man, mixed-race, elderly, wavy hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02033.png",
+    "seed": 2033,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a woman",
+      "ethnicity": "South Asian",
+      "hair": "tied-back hair",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a woman, South Asian, in their 40s, tied-back hair, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02034.png",
+    "seed": 2034,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a person",
+      "ethnicity": "Middle Eastern",
+      "hair": "short hair",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a person, Middle Eastern, in their early 20s, short hair, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02035.png",
+    "seed": 2035,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "elderly",
+      "present": "a person",
+      "ethnicity": "Black",
+      "hair": "medium-length hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a person, Black, elderly, medium-length hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02036.png",
+    "seed": 2036,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a woman",
+      "ethnicity": "mixed-race",
+      "hair": "tied-back hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a woman, mixed-race, in their early 20s, tied-back hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02037.png",
+    "seed": 2037,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 30s",
+      "present": "a woman",
+      "ethnicity": "East Asian",
+      "hair": "straight hair",
+      "extra": "with a light beard"
+    },
+    "prompt": "passport identification photo of a woman, East Asian, in their 30s, straight hair, with a light beard. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02038.png",
+    "seed": 2038,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a man",
+      "ethnicity": "South Asian",
+      "hair": "medium-length hair",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a man, South Asian, in their early 20s, medium-length hair, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02039.png",
+    "seed": 2039,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 60s",
+      "present": "a woman",
+      "ethnicity": "Nordic",
+      "hair": "tied-back hair",
+      "extra": "wearing a plain collared shirt"
+    },
+    "prompt": "passport identification photo of a woman, Nordic, in their 60s, tied-back hair, wearing a plain collared shirt. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02040.png",
+    "seed": 2040,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a woman",
+      "ethnicity": "Middle Eastern",
+      "hair": "wavy hair",
+      "extra": "with a light beard"
+    },
+    "prompt": "passport identification photo of a woman, Middle Eastern, in their 40s, wavy hair, with a light beard. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02041.png",
+    "seed": 2041,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a man",
+      "ethnicity": "mixed-race",
+      "hair": "straight hair",
+      "extra": "with a neutral expression"
+    },
+    "prompt": "passport identification photo of a man, mixed-race, in their early 20s, straight hair, with a neutral expression. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02042.png",
+    "seed": 2042,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "elderly",
+      "present": "a person",
+      "ethnicity": "mixed-race",
+      "hair": "curly hair",
+      "extra": "with freckles"
+    },
+    "prompt": "passport identification photo of a person, mixed-race, elderly, curly hair, with freckles. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02043.png",
+    "seed": 2043,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 40s",
+      "present": "a woman",
+      "ethnicity": "White",
+      "hair": "tied-back hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a woman, White, in their 40s, tied-back hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02044.png",
+    "seed": 2044,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their early 20s",
+      "present": "a person",
+      "ethnicity": "South Asian",
+      "hair": "straight hair",
+      "extra": "with a light beard"
+    },
+    "prompt": "passport identification photo of a person, South Asian, in their early 20s, straight hair, with a light beard. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02045.png",
+    "seed": 2045,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their late 20s",
+      "present": "a man",
+      "ethnicity": "East Asian",
+      "hair": "curly hair",
+      "extra": ""
+    },
+    "prompt": "passport identification photo of a man, East Asian, in their late 20s, curly hair. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02046.png",
+    "seed": 2046,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 50s",
+      "present": "a man",
+      "ethnicity": "Middle Eastern",
+      "hair": "tied-back hair",
+      "extra": "wearing glasses"
+    },
+    "prompt": "passport identification photo of a man, Middle Eastern, in their 50s, tied-back hair, wearing glasses. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
+  },
+  {
+    "file": "face_02047.png",
+    "seed": 2047,
+    "w": 512,
+    "h": 640,
+    "tags": {
+      "age": "in their 60s",
+      "present": "a woman",
+      "ethnicity": "Mediterranean",
+      "hair": "long hair",
+      "extra": "with a light beard"
+    },
+    "prompt": "passport identification photo of a woman, Mediterranean, in their 60s, long hair, with a light beard. Front-facing headshot, head and shoulders, looking directly at the camera, neutral expression, even soft studio lighting, plain light gray background, sharp focus, realistic skin texture, biometric ID photo, color photograph"
   }
 ]
