@@ -1,17 +1,18 @@
-"""Smoke test for the win/ HTTP server — stdlib only (urllib).
+"""Smoke test for the shared HTTP server — stdlib only (urllib).
 
 Synthesizes an ID (the demo passport + a real library face pasted into the photo
 box), then exercises the LIVE server end to end: /healthz, /detect, /redact.
 Writes out/smoke_redacted.png. Falls back to the demo's known regions if the
 detector finds nothing, so the redact path is always exercised.
 
-    .venv/Scripts/python.exe -m uvicorn win.server.app:app --port 8099   # terminal 1
-    .venv/Scripts/python.exe win/smoke_test.py                           # terminal 2
+    .venv/Scripts/python.exe -m uvicorn server.app:app --port 8100        # terminal 1
+    MR_BASE=http://127.0.0.1:8100 .venv/Scripts/python.exe smoke_test.py  # terminal 2
 """
 from __future__ import annotations
 
 import io
 import json
+import os
 import sys
 import time
 import urllib.request
@@ -19,9 +20,9 @@ from pathlib import Path
 
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[0]
 sys.path.insert(0, str(ROOT))
-BASE = "http://127.0.0.1:8099"
+BASE = os.environ.get("MR_BASE", "http://127.0.0.1:8100")
 
 
 def build_test_image():

@@ -1,6 +1,6 @@
 // Models.swift — Codable mirrors of the server's JSON contract.
 //
-// These match mac/server/app.py exactly:
+// These match server/app.py exactly:
 //   * RegionModel / RegionSpec.to_dict()  -> Region
 //   * Identity.to_dict()                  -> SyntheticIdentity
 //   * /detect and /detect_redact responses

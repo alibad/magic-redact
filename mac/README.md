@@ -57,7 +57,7 @@ export MAGIC_REDACT_DETECTOR=vision
   cd magic-redact
   python3 -m venv .venv && source .venv/bin/activate
   pip install -r core/requirements.txt          # just Pillow
-  pip install -r mac/server/requirements.txt     # fastapi, uvicorn, multipart
+  pip install -r server/requirements.txt     # fastapi, uvicorn, multipart
   ```
 
 ---
@@ -124,7 +124,7 @@ export MAGIC_REDACT_DETECTOR=vision
 #   export MAGIC_REDACT_VISION_BIN=/abs/path/to/VisionRegions   # if not in default build dir
 #   export MAGIC_REDACT_VISION_LANGS=en-US,fr-FR
 
-python -m uvicorn mac.server.app:app --port 8000
+python -m uvicorn server.app:app --port 8000
 ```
 
 Confirm it works:

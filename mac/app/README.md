@@ -6,7 +6,7 @@ project (or a SwiftPM executable) on the Mac and drop these files in.
 
 ## What the app is
 
-A thin client. All heavy logic stays in the shared server (`mac/server/app.py`,
+A thin client. All heavy logic stays in the shared server (`server/app.py`,
 run with `MAGIC_REDACT_DETECTOR=vision`):
 
 - detection → Apple Vision (via the `VisionRegions` Swift helper the server calls

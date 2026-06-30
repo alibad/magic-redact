@@ -1,8 +1,14 @@
 // RedactClient.swift — networking client for the shared local FastAPI server.
 //
-// Talks to the same /detect, /redact, /identity, /detect_redact endpoints the
-// Windows target defines. Base URL defaults to the local server; change it in
-// one place to point at a server running elsewhere on the LAN.
+// NOTE (post-consolidation): the canonical server is `server/app.py`, and its
+// /detect & /redact use multipart upload returning PNG bytes (+ X-Identity
+// header) — see web/app.js for the exact contract. This client still uses the
+// earlier JSON/base64 shapes. The simplest Mac front-end TODAY is the SERVED WEB
+// UI (run the server with MAGIC_REDACT_DETECTOR=vision and open its URL in
+// Safari). To finish this native shell, align the calls below with web/app.js.
+//
+// Base URL defaults to the local server; change it in one place to point at a
+// server running elsewhere on the LAN.
 
 import Foundation
 #if canImport(AppKit)

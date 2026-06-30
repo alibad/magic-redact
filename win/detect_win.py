@@ -17,7 +17,7 @@ EVERY capability degrades gracefully. The heavy imports happen lazily inside
 try/except *at call time*, never at module import. If a library is missing we
 simply skip that capability and still return whatever else we found (possibly an
 empty list) — importing or constructing this module must never raise because a
-dependency is absent. That is what lets `win.server.app` import and boot with
+dependency is absent. That is what lets `server.app` import and boot with
 nothing but FastAPI + Pillow installed.
 
 The macOS target ships its own `Detector` (Apple Vision); both subclass the same

@@ -37,7 +37,7 @@ the manifest incrementally so a rate-limit/crash never loses progress.
 
 ## Using them to test the app
 
-- **Web UI:** start the win server (`python -m uvicorn win.server.app:app --port 8100`),
+- **Web UI:** start the win server (`python -m uvicorn server.app:app --port 8100`),
   open it, and drag any file from `samples/images/` in → Detect → Redact all.
 - **Batch:** point a detector run at the folder to see how auto-detection holds
   up across passports vs. ID cards vs. licences (good for tuning the field

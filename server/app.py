@@ -1,24 +1,27 @@
-"""magic-redact — Windows/RTX FastAPI service.
+"""magic-redact — shared FastAPI service (Windows + macOS).
 
-Thin HTTP layer over the portable `core/` engine. It owns NO redaction logic:
-detection comes from a pluggable `core.detect.base.Detector` (Windows default:
-`win.detect_win.WinDetector`), substitution + watermark come from `core.redact`.
+ONE server both platforms run. Thin HTTP layer over the portable `core/` engine;
+it owns NO redaction logic. The only platform-specific piece — the detector — is
+chosen at startup by the MAGIC_REDACT_DETECTOR env var; substitution + watermark
+come from `core.redact`, and the web UI in `web/` is the cross-platform front-end.
 
 Endpoints
-  GET  /healthz            -> {ok, detector_available, qwen_available, detector}
+  GET  /healthz | /health  -> {ok, detector_available, qwen_available, detector}
   POST /detect   (image)   -> {regions:[RegionSpec.to_dict()], width, height, detector_available}
   POST /redact   (image+json) -> PNG bytes (+ identity in X-Identity header)
+  POST /detect_redact (image) -> one-shot detect+redact-all -> PNG bytes
   POST /identity           -> a fresh Identity.to_dict()
-  GET  /                    -> the single-page web UI (win/web/)
+  GET  /samples            -> specimen test-document gallery list
+  GET  /                    -> the single-page web UI (web/)
 
 Detector is pluggable via env var MAGIC_REDACT_DETECTOR:
-  auto (default) | none | paddle | rapidocr   (paddle/rapidocr both -> WinDetector)
-A future macOS build registers a `vision` detector behind the same factory with
-NO change to this file.
-
-Graceful degradation is a hard requirement: this module imports and boots with
-nothing but FastAPI + Pillow installed. Detector deps (RapidOCR / OpenCV) and the
-Qwen Tier-3 server are all optional and probed lazily.
+  auto/win/rapidocr/paddle -> win.detect_win (RapidOCR + OpenCV YuNet, Windows)
+  vision                   -> mac.detect_vision (Apple Vision, macOS)
+  demo                     -> built-in no-op (boots/HTTP-testable anywhere)
+  none                     -> no detector (manual boxes only)
+Backends are imported lazily, so the server boots on either OS without the
+other's deps. Graceful degradation is a hard requirement: this module imports and
+boots with nothing but FastAPI + Pillow installed.
 """
 from __future__ import annotations
 
@@ -38,13 +41,13 @@ from PIL import Image
 from core import RegionSpec, generate_identity, redact
 from core.identity import Identity
 
-WEB_DIR = Path(__file__).resolve().parent.parent / "web"
-_ROOT = Path(__file__).resolve().parents[2]
+_ROOT = Path(__file__).resolve().parents[1]
+WEB_DIR = _ROOT / "web"
 ASSETS_FACE_DIR = Path(os.environ.get("MAGIC_REDACT_FACE_DIR", _ROOT / "assets" / "faces"))
 SAMPLES_DIR = _ROOT / "samples" / "images"
 _SAMPLES_MANIFESTS = [_ROOT / "samples" / "manifest.json", SAMPLES_DIR / "manifest.json"]
 
-app = FastAPI(title="magic-redact (win)", version="0.1.0")
+app = FastAPI(title="magic-redact", version="0.2.0")
 
 # Lazily-built singletons.
 _detector = None
@@ -58,32 +61,50 @@ def _detector_env() -> str:
     return (os.environ.get("MAGIC_REDACT_DETECTOR", "auto") or "auto").strip().lower()
 
 
+def _demo_detector():
+    """Zero-dependency no-op detector so the server boots and is HTTP-testable on
+    any machine. Returns no regions (use manual boxes / 'draw' mode with it)."""
+    from core.detect.base import Detector
+
+    class _DemoDetector(Detector):
+        name = "demo"
+        available = True
+
+        def detect(self, image):
+            return []
+
+    return _DemoDetector()
+
+
 def _build_detector():
-    """Return (detector_or_None, kind_str). Never raises."""
+    """Return (detector_or_None, kind_str). Never raises. Backends are imported
+    lazily so the server boots on either OS without the other's deps."""
     choice = _detector_env()
     if choice == "none":
         return None, "none"
+    if choice == "demo":
+        return _demo_detector(), "demo"
 
-    # Map a backend name -> (module, class). Add mac here later without touching
-    # the rest of the file: "vision": ("mac.detect_mac", "VisionDetector").
+    # name -> (module, callable). The callable is a class or a build_*() factory;
+    # either way calling it with no args yields a core.detect.base.Detector.
     registry = {
         "auto": ("win.detect_win", "WinDetector"),
+        "win": ("win.detect_win", "WinDetector"),
         "paddle": ("win.detect_win", "WinDetector"),
         "rapidocr": ("win.detect_win", "WinDetector"),
-        "win": ("win.detect_win", "WinDetector"),
+        "vision": ("mac.detect_vision", "build_detector"),
     }
     target = registry.get(choice)
     if target is None:
         print(f"[app] unknown MAGIC_REDACT_DETECTOR={choice!r}; using auto.")
         target = registry["auto"]
 
-    mod_name, cls_name = target
+    mod_name, attr = target
     try:
         mod = importlib.import_module(mod_name)
-        cls = getattr(mod, cls_name)
-        return cls(), choice
+        return getattr(mod, attr)(), choice
     except Exception as exc:
-        print(f"[app] detector {mod_name}.{cls_name} unavailable: {exc}")
+        print(f"[app] detector {mod_name}.{attr} unavailable: {exc}")
         return None, choice
 
 
@@ -100,14 +121,7 @@ def _detector_available() -> bool:
     if det is None:
         return False
     avail = getattr(det, "available", None)
-    if isinstance(avail, bool):
-        return avail
-    # Fall back to the module-level helper if present.
-    try:
-        from win import detect_win
-        return detect_win.availability()["any"]
-    except Exception:
-        return True  # a detector exists; assume usable.
+    return avail if isinstance(avail, bool) else True  # detector exists; assume usable
 
 
 def _qwen_available() -> bool:
@@ -169,6 +183,12 @@ def healthz():
         "qwen_available": _qwen_available(),
         "face_library_count": _face_library_count(),
     }
+
+
+@app.get("/health")
+def health():
+    """Alias of /healthz (some clients / the SwiftUI shell expect /health)."""
+    return healthz()
 
 
 def _face_library_count() -> int:
@@ -288,6 +308,50 @@ def _qwen_strategies():
         return base
 
 
+@app.post("/detect_redact")
+async def detect_redact_endpoint(
+    image: UploadFile = File(...),
+    seed: Optional[int] = Form(None),
+    watermark: bool = Form(True),
+    face_source: str = Form("library"),
+):
+    """One-shot: detect every region then redact them all with one coherent
+    identity. Returns the watermarked PNG (+ identity in X-Identity header)."""
+    raw = await image.read()
+    try:
+        img = _load_image(raw)
+    except Exception as exc:
+        return JSONResponse({"error": f"bad image: {exc}"}, status_code=400)
+
+    det = get_detector()
+    if det is None:
+        return JSONResponse({"error": "no detector configured"}, status_code=422)
+    try:
+        specs = det.detect(img)
+    except Exception as exc:
+        return JSONResponse({"error": f"detection failed: {exc}"}, status_code=500)
+    for i, r in enumerate(specs):
+        if not r.id:
+            r.id = f"r{i}"
+    if not specs:
+        return JSONResponse({"error": "nothing detected"}, status_code=422)
+
+    identity = generate_identity(seed=seed)
+    strategies = _qwen_strategies() if face_source == "qwen" else None
+    out_img, processed = redact(
+        img, specs, identity=identity, strategies=strategies,
+        watermark=bool(watermark), seed=seed,
+    )
+    buf = io.BytesIO()
+    out_img.save(buf, format="PNG")
+    buf.seek(0)
+    headers = {
+        "X-Identity": _identity_header(identity),
+        "X-Processed-Count": str(len(processed)),
+    }
+    return Response(content=buf.getvalue(), media_type="image/png", headers=headers)
+
+
 @app.post("/identity")
 def fresh_identity(seed: Optional[int] = Form(None)):
     return generate_identity(seed=seed).to_dict()
@@ -330,7 +394,7 @@ def index():
     return JSONResponse({"error": "web UI not found", "expected": str(idx)}, status_code=404)
 
 
-# Serve static assets (app.js, style.css, ...) from win/web/ at /static.
+# Serve static assets (app.js, style.css, ...) from web/ at /static.
 if WEB_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="static")
 

@@ -3,7 +3,7 @@
 // Architecture (see mac/app/README.md): this app is a THIN native shell. All the
 // heavy logic — detection (Apple Vision via the Swift helper), the coherent
 // synthetic identity, the redaction strategies, and the mandatory SPECIMEN
-// watermark — lives in the shared local FastAPI server (mac/server/app.py) run
+// watermark — lives in the shared local FastAPI server (server/app.py) run
 // with MAGIC_REDACT_DETECTOR=vision. The app just loads an image, calls the
 // server's /detect, /redact, /identity endpoints, and draws the result.
 //

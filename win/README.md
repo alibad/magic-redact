@@ -22,7 +22,7 @@ cd magic-redact
 python -m pip install -r win/requirements.txt
 
 # Boot the server (default port 8099):
-python -m uvicorn win.server.app:app --port 8099
+python -m uvicorn server.app:app --port 8099
 # then open http://localhost:8099
 ```
 
@@ -74,7 +74,7 @@ Request flow:
 | POST   | `/detect`   | multipart `image` → `{regions:[…], width, height, detector_available}` |
 | POST   | `/redact`   | `image` + form (`regions` JSON, `seed?`, `identity_seed?`, `only?` ids, `watermark?`, `face_source=library\|qwen`) → **PNG bytes**. The identity used is returned base64-JSON in the `X-Identity` response header (and processed count in `X-Processed-Count`). |
 | POST   | `/identity` | `seed?` → a fresh `Identity.to_dict()` (UI "Re-roll identity"). |
-| GET    | `/`         | the web UI; static files served from `win/web/` at `/static`. |
+| GET    | `/`         | the web UI; static files served from `web/` at `/static`. |
 
 `identity_seed` makes re-rolls reproducible: the UI sends the same seed it shows
 in the side panel so a per-region redact and a "Redact all" use the *same* person.
@@ -92,7 +92,7 @@ at module import. Consequences:
 - **Neither installed** → `/detect` returns `regions: []` with
   `detector_available: false`. The UI switches to **manual mode**: draw boxes on
   the canvas and tag each (face / a field name / MRZ), then redact. Nothing
-  crashes; `python -c "import win.server.app"` succeeds with only FastAPI + Pillow.
+  crashes; `python -c "import server.app"` succeeds with only FastAPI + Pillow.
 - Even with deps installed, a per-call detector failure is caught and degrades to
   manual mode rather than erroring the request.
 
@@ -147,10 +147,10 @@ without it.
 
 ```bash
 # Imports cleanly with NO optional deps:
-python -c "import win.server.app; print('import OK')"
+python -c "import server.app; print('import OK')"
 
 # Boot:
-python -m uvicorn win.server.app:app --port 8099
+python -m uvicorn server.app:app --port 8099
 
 # In another shell:
 curl http://localhost:8099/healthz

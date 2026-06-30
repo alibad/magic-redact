@@ -1,0 +1,7 @@
+# Shared server — base deps (run on Windows AND macOS).
+# Detector backends add their own extras: win/requirements.txt (RapidOCR + OpenCV)
+# or the macOS Apple Vision helper (see mac/README.md).
+fastapi>=0.110
+uvicorn[standard]>=0.27
+python-multipart>=0.0.9
+Pillow>=10.2
