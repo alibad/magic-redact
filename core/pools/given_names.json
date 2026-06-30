@@ -1,0 +1,9 @@
+{
+  "M": ["James", "Liam", "Noah", "Lucas", "Mateo", "Omar", "Yusuf", "Hiroshi", "Wei", "Arjun",
+        "Daniel", "Marco", "Pavel", "Sven", "Diego", "Kofi", "Tariq", "Sebastian", "Ethan", "Andre",
+        "Viktor", "Hassan", "Nikolai", "Aiden", "Carlos", "Felix", "Ravi", "Soren", "Mehmet", "Luca"],
+  "F": ["Olivia", "Emma", "Amara", "Sofia", "Yuki", "Mei", "Priya", "Aisha", "Fatima", "Elena",
+        "Isabella", "Anna", "Nadia", "Ingrid", "Lucia", "Zara", "Leila", "Camila", "Hana", "Maya",
+        "Freya", "Noor", "Katarina", "Chloe", "Valentina", "Sara", "Anjali", "Astrid", "Ayse", "Giulia"],
+  "X": ["Alex", "Sam", "Jordan", "Noa", "Kai", "Rowan", "Ariel", "Robin", "Sasha", "Eden"]
+}

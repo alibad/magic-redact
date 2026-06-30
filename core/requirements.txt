@@ -1,0 +1,2 @@
+# Portable core — the ONLY hard dependency is Pillow.
+Pillow>=10.2

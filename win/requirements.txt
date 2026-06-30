@@ -1,0 +1,26 @@
+# magic-redact — Windows/RTX target dependencies.
+#
+# ── REQUIRED (the server + portable engine run on just these) ──────────────
+# The portable core needs only Pillow; the win server adds FastAPI + uvicorn.
+fastapi>=0.110
+uvicorn[standard]>=0.27
+python-multipart>=0.0.9     # multipart form parsing for /detect and /redact
+Pillow>=10.2                # also pulled by core/requirements.txt
+
+# ── OPTIONAL: detection backend (win/detect_win.py) ────────────────────────
+# All pip-installable, NO PyTorch, Windows-friendly. Each piece degrades
+# gracefully: if a lib below is absent the matching capability is skipped and
+# the server still boots, /detect just returns fewer (or zero) regions and the
+# UI falls back to manual boxes. Install to enable auto-detection:
+#
+#   pip install rapidocr-onnxruntime opencv-python
+#
+# rapidocr-onnxruntime  -> OCR text + boxes (pulls onnxruntime + numpy + opencv)
+# opencv-python         -> cv2.FaceDetectorYN (YuNet) face box; the YuNet ONNX
+#                          model auto-downloads to win/models/ on first use.
+# rapidocr-onnxruntime>=1.3
+# opencv-python>=4.9      # provides cv2.FaceDetectorYN (YuNet)
+
+# ── OPTIONAL: Tier-3 Qwen face generation (win/diffusion_qwen.py) ──────────
+# NO extra Python deps — uses stdlib urllib to talk to the local Qwen-Image
+# server at http://localhost:8021. The server itself is a separate process.

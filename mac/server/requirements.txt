@@ -1,0 +1,7 @@
+# Shared server deps (on top of core/requirements.txt -> Pillow).
+# Platform-neutral: no OCR/Vision packages here — the detector is swapped
+# at runtime via MAGIC_REDACT_DETECTOR (Apple Vision needs no pip package,
+# just the compiled Swift helper).
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9

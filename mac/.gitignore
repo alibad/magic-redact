@@ -1,0 +1,15 @@
+# Swift / SwiftPM build artifacts
+detect_vision/.build/
+.build/
+*.o
+*.swiftmodule
+
+# Xcode
+app/**/xcuserdata/
+app/**/*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Python
+__pycache__/
+*.pyc

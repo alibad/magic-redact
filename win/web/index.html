@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magic-redact — local document anonymizer</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">▦</span>
+      <div>
+        <h1>magic-redact</h1>
+        <p class="tag">100% local · ID anonymizer · every output stamped <b>SPECIMEN</b></p>
+      </div>
+    </div>
+    <div class="status" id="status">
+      <span class="dot" id="dot-detector" title="detector"></span> detector
+      <span class="dot" id="dot-qwen" title="Qwen Tier-3"></span> qwen
+    </div>
+  </header>
+
+  <main>
+    <section class="canvas-col">
+      <div id="dropzone" class="dropzone">
+        <input type="file" id="file" accept="image/*" hidden />
+        <div class="dz-inner">
+          <p class="dz-big">Drop an ID document here</p>
+          <p class="dz-sub">or <button id="browse" class="link">browse</button> — passport, license, badge</p>
+          <p class="dz-note">Nothing is uploaded to any server. Processing is local.</p>
+        </div>
+      </div>
+
+      <div id="stage" class="stage hidden">
+        <div class="stage-toolbar">
+          <button id="btn-detect" class="btn">Detect regions</button>
+          <button id="btn-redact-all" class="btn primary">Redact all</button>
+          <label class="chk"><input type="checkbox" id="opt-watermark" checked /> SPECIMEN watermark</label>
+          <label class="chk" id="qwen-opt-wrap"><input type="checkbox" id="opt-qwen" /> Qwen face (Tier-3)</label>
+          <button id="btn-reset" class="btn ghost">New image</button>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas"></canvas>
+        </div>
+
+        <div id="manual-bar" class="manual-bar hidden">
+          <span class="manual-msg">No regions auto-detected — draw boxes manually.</span>
+          <label>Tag new box as:
+            <select id="manual-field">
+              <option value="photo">face / photo</option>
+              <option value="surname">surname</option>
+              <option value="given_names">given names</option>
+              <option value="full_name">full name</option>
+              <option value="dob">date of birth</option>
+              <option value="expiry">date of expiry</option>
+              <option value="issue">date of issue</option>
+              <option value="nationality">nationality</option>
+              <option value="sex">sex</option>
+              <option value="doc_number">document no.</option>
+              <option value="place_of_birth">place of birth</option>
+              <option value="authority">authority</option>
+              <option value="mrz">MRZ</option>
+            </select>
+          </label>
+          <button id="btn-clear-manual" class="btn ghost small">Clear boxes</button>
+        </div>
+        <p class="hint" id="hint">Hover a box to highlight; click a box to redact just that region.</p>
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Synthetic identity</h2>
+          <button id="btn-reroll" class="btn ghost small">Re-roll</button>
+        </div>
+        <dl id="identity" class="identity">
+          <div><dt>Name</dt><dd id="id-name">—</dd></div>
+          <div><dt>Sex</dt><dd id="id-sex">—</dd></div>
+          <div><dt>DOB</dt><dd id="id-dob">—</dd></div>
+          <div><dt>Nationality</dt><dd id="id-nat">—</dd></div>
+          <div><dt>Doc #</dt><dd id="id-doc">—</dd></div>
+          <div><dt>Expiry</dt><dd id="id-exp">—</dd></div>
+          <div class="mrz-row"><dt>MRZ</dt><dd id="id-mrz" class="mrz">—</dd></div>
+        </dl>
+        <p class="seed-note">seed <span id="id-seed">—</span> · re-roll for a new coherent person</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>Result</h2>
+          <a id="btn-download" class="btn ghost small disabled" download="redacted.png">Download PNG</a>
+        </div>
+        <div id="result-wrap" class="result-wrap">
+          <p class="result-empty">Redact a region to see the watermarked result here.</p>
+        </div>
+        <p class="legend">
+          <span class="key face">face</span>
+          <span class="key text">text</span>
+          <span class="key mrz">mrz</span>
+        </p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <span>Redaction is substitution + a mandatory SPECIMEN watermark. Tier-3 Qwen generates a fresh synthetic portrait only (true font-preserving text edits need Qwen-Image-Edit).</span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
