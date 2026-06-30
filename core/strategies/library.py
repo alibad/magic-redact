@@ -10,6 +10,7 @@ an unknown text field) so the pipeline falls through to the classic fallback.
 """
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Optional
 
@@ -20,6 +21,8 @@ from ..detect.base import is_mrz_line
 from .base import RedactionStrategy, RegionSpec
 
 _IMG_EXT = (".png", ".jpg", ".jpeg", ".webp")
+# Map an identity's sex to how the library prompts present that portrait.
+_SEX_TO_PRESENT = {"M": "a man", "F": "a woman", "X": "a person"}
 
 
 class FaceLibraryStrategy(RedactionStrategy):
@@ -30,6 +33,7 @@ class FaceLibraryStrategy(RedactionStrategy):
         self.tone_match = tone_match
         self.feather = feather
         self._cache: Optional[list[Path]] = None
+        self._present: Optional[dict] = None
 
     def faces(self) -> list[Path]:
         if self._cache is None:
@@ -37,6 +41,32 @@ class FaceLibraryStrategy(RedactionStrategy):
                 p for p in self.face_dir.glob("**/*") if p.suffix.lower() in _IMG_EXT
             ) if self.face_dir.exists() else []
         return self._cache
+
+    def _present_map(self) -> dict:
+        """filename -> 'a man'/'a woman'/'a person' from the library manifest."""
+        if self._present is None:
+            self._present = {}
+            mf = self.face_dir / "manifest.json"
+            if mf.exists():
+                try:
+                    for m in json.loads(mf.read_text(encoding="utf-8")):
+                        present = (m.get("tags") or {}).get("present")
+                        if m.get("file") and present:
+                            self._present[m["file"]] = present
+                except Exception:
+                    self._present = {}
+        return self._present
+
+    def _pick(self, pool: list[Path], identity, rng) -> Path:
+        """Prefer a portrait whose presented gender matches the identity's sex;
+        fall back to the whole pool when nothing matches (or no manifest)."""
+        want = _SEX_TO_PRESENT.get(getattr(identity, "sex", "X"))
+        if want:
+            pmap = self._present_map()
+            matched = [p for p in pool if pmap.get(p.name) == want]
+            if matched:
+                return rng.choice(matched)
+        return rng.choice(pool)
 
     def can_handle(self, region: RegionSpec) -> bool:
         return region.kind == "face"
@@ -51,7 +81,7 @@ class FaceLibraryStrategy(RedactionStrategy):
         if bw <= 0 or bh <= 0:
             return None
 
-        face = Image.open(rng.choice(pool)).convert("RGB")
+        face = Image.open(self._pick(pool, identity, rng)).convert("RGB")
         face = _cover(face, bw, bh)
         if self.tone_match:
             face = _match_tone(face, image.crop(region.box))
