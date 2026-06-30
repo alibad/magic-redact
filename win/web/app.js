@@ -322,11 +322,32 @@ function showResult(blob) {
   if (state.lastResultUrl) URL.revokeObjectURL(state.lastResultUrl);
   const url = URL.createObjectURL(blob);
   state.lastResultUrl = url;
-  $("result-wrap").innerHTML = `<img src="${url}" alt="redacted result (SPECIMEN watermarked)" />`;
+  $("result-wrap").innerHTML = `<img src="${url}" alt="redacted result (SPECIMEN watermarked)" title="Click to enlarge" />`;
+  $("result-wrap").querySelector("img").addEventListener("click", () => openLightbox(url));
   const dl = $("btn-download");
   dl.href = url;
   dl.classList.remove("disabled");
 }
+
+/* ----------------------------------------------------------------------- */
+/* lightbox — click the result to view full size; click image to zoom 1:1   */
+/* ----------------------------------------------------------------------- */
+function openLightbox(url) {
+  const img = $("lightbox-img");
+  img.src = url;
+  img.classList.remove("actual");
+  $("lightbox").classList.remove("hidden");
+}
+function closeLightbox() { $("lightbox").classList.add("hidden"); }
+$("lightbox-close").addEventListener("click", closeLightbox);
+$("lightbox").addEventListener("click", (e) => {
+  if (e.target.id === "lightbox" || e.target.classList.contains("lightbox-inner")) closeLightbox();
+});
+$("lightbox-img").addEventListener("click", (e) => {
+  e.stopPropagation();
+  e.currentTarget.classList.toggle("actual");  // fit <-> 1:1 (scrollable)
+});
+window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
 
 /* ----------------------------------------------------------------------- */
 /* identity panel + re-roll                                                  */
