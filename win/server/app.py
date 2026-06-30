@@ -39,12 +39,10 @@ from core import RegionSpec, generate_identity, redact
 from core.identity import Identity
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
-ASSETS_FACE_DIR = Path(
-    os.environ.get(
-        "MAGIC_REDACT_FACE_DIR",
-        Path(__file__).resolve().parents[2] / "assets" / "faces",
-    )
-)
+_ROOT = Path(__file__).resolve().parents[2]
+ASSETS_FACE_DIR = Path(os.environ.get("MAGIC_REDACT_FACE_DIR", _ROOT / "assets" / "faces"))
+SAMPLES_DIR = _ROOT / "samples" / "images"
+_SAMPLES_MANIFESTS = [_ROOT / "samples" / "manifest.json", SAMPLES_DIR / "manifest.json"]
 
 app = FastAPI(title="magic-redact (win)", version="0.1.0")
 
@@ -295,6 +293,35 @@ def fresh_identity(seed: Optional[int] = Form(None)):
     return generate_identity(seed=seed).to_dict()
 
 
+@app.get("/samples")
+def samples():
+    """List specimen test documents in samples/images/ for the UI gallery."""
+    by_file = {}
+    man = next((p for p in _SAMPLES_MANIFESTS if p.exists()), None)
+    if man:
+        try:
+            for m in json.loads(man.read_text(encoding="utf-8")):
+                if m.get("file"):
+                    by_file[m["file"]] = m
+        except Exception:
+            by_file = {}
+    items = []
+    if SAMPLES_DIR.exists():
+        exts = (".png", ".jpg", ".jpeg", ".webp")
+        for p in sorted(SAMPLES_DIR.glob("*")):
+            if p.suffix.lower() not in exts:
+                continue
+            m = by_file.get(p.name, {})
+            items.append({
+                "file": p.name,
+                "url": f"/samples-img/{p.name}",
+                "title": m.get("title") or p.name,
+                "license": m.get("license", ""),
+                "source_url": m.get("source_url", ""),
+            })
+    return {"items": items, "count": len(items)}
+
+
 @app.get("/")
 def index():
     idx = WEB_DIR / "index.html"
@@ -306,3 +333,7 @@ def index():
 # Serve static assets (app.js, style.css, ...) from win/web/ at /static.
 if WEB_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="static")
+
+# Serve the specimen test-document images for the gallery.
+if SAMPLES_DIR.exists():
+    app.mount("/samples-img", StaticFiles(directory=str(SAMPLES_DIR)), name="samples-img")

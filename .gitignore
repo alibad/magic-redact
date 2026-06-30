@@ -17,6 +17,9 @@ out/
 # Auto-downloaded detection model cache (re-fetched on first use)
 win/models/
 
+# Fetched specimen test documents (re-pull with samples/fetch_specimens.py)
+samples/images/
+
 # OS / editor
 .DS_Store
 Thumbs.db

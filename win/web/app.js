@@ -40,7 +40,47 @@ async function boot() {
     $("dot-qwen").classList.add(h.qwen_available ? "on" : "off");
     if (!h.qwen_available) $("qwen-opt-wrap").classList.add("hidden");
   } catch (e) { /* health is best-effort */ }
+  loadGallery();
   await reroll();
+}
+
+/* ----------------------------------------------------------------------- */
+/* gallery of specimen test documents (samples/images)                      */
+/* ----------------------------------------------------------------------- */
+async function loadGallery() {
+  const grid = $("gallery-grid");
+  try {
+    const data = await fetch("/samples").then((r) => r.json());
+    const items = data.items || [];
+    if (!items.length) { $("gallery").classList.add("hidden"); return; }
+    $("gallery-count").textContent = `(${items.length})`;
+    grid.innerHTML = "";
+    for (const it of items) {
+      const card = document.createElement("button");
+      card.className = "gthumb";
+      card.title = (it.title || it.file) + (it.license ? ` — ${it.license}` : "");
+      const img = document.createElement("img");
+      img.loading = "lazy"; img.src = it.url; img.alt = "";
+      const cap = document.createElement("span");
+      cap.className = "gcap"; cap.textContent = galleryLabel(it);
+      card.append(img, cap);
+      card.addEventListener("click", () => loadFromUrl(it.url, it.file));
+      grid.appendChild(card);
+    }
+    $("gallery").classList.remove("hidden");
+  } catch (e) { $("gallery").classList.add("hidden"); }
+}
+
+function galleryLabel(it) {
+  const t = (it.title || it.file || "").replace(/^File:/, "").replace(/\.[a-z0-9]+$/i, "");
+  return t.length > 30 ? t.slice(0, 28) + "…" : t;
+}
+
+async function loadFromUrl(url, name) {
+  try {
+    const blob = await fetch(url).then((r) => r.blob());
+    loadFile(new File([blob], name || "sample.png", { type: blob.type || "image/png" }));
+  } catch (e) { toast("Could not load that document.", true); }
 }
 
 /* ----------------------------------------------------------------------- */
@@ -68,6 +108,7 @@ function loadFile(file) {
     state.natW = state.img.naturalWidth;
     state.natH = state.img.naturalHeight;
     $("dropzone").classList.add("hidden");
+    $("gallery").classList.add("hidden");
     $("stage").classList.remove("hidden");
     fitCanvas();
     draw();
@@ -322,6 +363,7 @@ $("btn-reset").addEventListener("click", () => {
   state.file = null; state.regions = []; state.manual = false;
   $("stage").classList.add("hidden");
   $("dropzone").classList.remove("hidden");
+  $("gallery").classList.toggle("hidden", $("gallery-grid").children.length === 0);
   $("manual-bar").classList.add("hidden");
   $("result-wrap").innerHTML = `<p class="result-empty">Redact a region to see the watermarked result here.</p>`;
   $("btn-download").classList.add("disabled");
