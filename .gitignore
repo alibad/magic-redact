@@ -14,6 +14,9 @@ dist/
 out/
 *.log
 
+# Auto-downloaded detection model cache (re-fetched on first use)
+win/models/
+
 # OS / editor
 .DS_Store
 Thumbs.db
