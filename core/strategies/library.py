@@ -95,6 +95,12 @@ class FaceLibraryStrategy(RedactionStrategy):
 class TextSubstituteStrategy(RedactionStrategy):
     name = "text_substitute"
 
+    def __init__(self, scramble_unknown: bool = False):
+        # When True, unclassified text is REPLACED with format-preserving random
+        # text (for generating document variants) instead of declining to the
+        # pixelate fallback.
+        self.scramble_unknown = scramble_unknown
+
     def can_handle(self, region: RegionSpec) -> bool:
         return region.kind in ("text", "mrz")
 
@@ -104,6 +110,8 @@ class TextSubstituteStrategy(RedactionStrategy):
             # MRZ regions sometimes arrive as kind="text"; rescue them.
             if region.kind == "mrz" or (region.text and is_mrz_line(region.text)):
                 value = "\n".join(identity.mrz_lines)
+            elif self.scramble_unknown and region.text and region.text.strip():
+                value = _scramble_text(region.text, rng)
             else:
                 return None  # unknown field -> classic fallback
 
@@ -122,7 +130,30 @@ class TextSubstituteStrategy(RedactionStrategy):
         is_mono = region.kind == "mrz" or region.field == "mrz" or len(lines) > 1
         _draw_fitted(draw, (x0, y0, bw, bh), lines, fg, mono=is_mono)
         region.meta["strategy"] = self.name
+        region.meta["value"] = value
         return image
+
+
+_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+_LOWER = "abcdefghijklmnopqrstuvwxyz"
+_DIGITS = "0123456789"
+
+
+def _scramble_text(text: str, rng) -> str:
+    """Format-preserving replacement: keep length + character classes (so a
+    passport number stays passport-number-shaped, a date stays date-shaped),
+    randomize the actual chars. Spaces / punctuation / MRZ fillers preserved."""
+    out = []
+    for ch in text:
+        if ch.isdigit():
+            out.append(rng.choice(_DIGITS))
+        elif ch.isupper():
+            out.append(rng.choice(_UPPER))
+        elif ch.islower():
+            out.append(rng.choice(_LOWER))
+        else:
+            out.append(ch)
+    return "".join(out)
 
 
 # --- image helpers ----------------------------------------------------------

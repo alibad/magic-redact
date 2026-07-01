@@ -30,6 +30,18 @@ def default_strategies(face_dir: str = "assets/faces") -> list[RedactionStrategy
     ]
 
 
+def replace_strategies(face_dir: str = "assets/faces") -> list[RedactionStrategy]:
+    """Like default_strategies, but REPLACES unclassified text with format-
+    preserving synthetic text (digits->digits, letters->letters, same length)
+    instead of pixelating it. Use this to generate believable document *variants*
+    where every field carries new-but-plausible content."""
+    return [
+        TextSubstituteStrategy(scramble_unknown=True),
+        FaceLibraryStrategy(face_dir),
+        ClassicRedactStrategy(mode="pixelate"),
+    ]
+
+
 def redact(
     image: Image.Image,
     regions: Sequence[RegionSpec],
@@ -38,10 +50,14 @@ def redact(
     strategies: Optional[Sequence[RedactionStrategy]] = None,
     only: Optional[Iterable[str]] = None,   # region ids to process; None = all
     watermark: bool = True,
+    replace_text: bool = False,             # replace unknown text vs pixelate it
     seed: Optional[int] = None,
 ) -> tuple[Image.Image, list[RegionSpec]]:
     identity = identity or generate_identity(seed=seed)
-    strategies = list(strategies) if strategies is not None else default_strategies()
+    if strategies is not None:
+        strategies = list(strategies)
+    else:
+        strategies = replace_strategies() if replace_text else default_strategies()
     rng = random.Random(seed)
     only_set = set(only) if only is not None else None
 
